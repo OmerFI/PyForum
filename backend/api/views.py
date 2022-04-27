@@ -1,4 +1,4 @@
-from django.http import Http404, HttpResponseBadRequest
+from django.http import Http404
 from rest_framework.response import Response
 from rest_framework.permissions import (
     IsAuthenticated,
@@ -12,9 +12,7 @@ from rest_framework.views import APIView
 from rest_framework.generics import (
     GenericAPIView,
     CreateAPIView,
-    ListAPIView,
     UpdateAPIView,
-    ListCreateAPIView,
 )
 from rest_framework import mixins
 from rest_framework.parsers import MultiPartParser, FileUploadParser
@@ -78,24 +76,10 @@ class ProfileUpdateImageView(APIView):
         return Profile.objects.get(user_id=self.kwargs.get("user_id"))
 
     def put(self, request, *args, **kwargs):
-        print("====================")
-        print(request)
-        print(request.data)
-        print("====================")
         try:
             image_obj = request.data["image"]
         except Exception as e:
-            print("====================")
-            print(e)
-            print("====================")
-            try:
-                image_obj = request.data["file"]
-            except Exception as e:
-                print("====================")
-                print(e)
-                print("====================")
-
-                raise NotAcceptable(detail="No image provided!")
+            raise NotAcceptable(detail="No image provided!")
         image_name = image_obj.name
         profile = self.get_object()
         profile.image.save(image_name, image_obj)
