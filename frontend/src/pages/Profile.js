@@ -25,7 +25,8 @@ const Profile = () => {
     <div className="container">
       <div className="col-lg-8 mx-auto">
         <h1 className="mb-5 text-center">
-          {userData ? userData.username : ""} Kullanıcısının Profili
+          {/* {userData ? userData.username : ""} Kullanıcısının Profili */}
+          {userData ? userData.username : ""}
         </h1>
 
         <div className="d-flex flex-column align-items-center justify-content-center mb-3">
