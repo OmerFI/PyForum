@@ -4,7 +4,6 @@ import { useAnonimAxios } from "../utils/useAxios";
 import useAxios from "../utils/useAxios";
 import "../PostDetails.css";
 import Comment from "../components/Comment";
-// import useC
 import { useAuthContext } from "../context/AuthContext";
 import RefreshPage from "../utils/Page";
 
