@@ -82,7 +82,10 @@ class ProfileUpdateImageView(APIView):
             raise NotAcceptable(detail="No image provided!")
         image_name = image_obj.name
         profile = self.get_object()
-        profile.image.save(image_name, image_obj)
+        try:
+            profile.image.save(image_name, image_obj)
+        except Exception as e:
+            raise NotAcceptable(detail="Unidentified image!")
         profile.save()
 
         return Response({"message": "Image updated"})
