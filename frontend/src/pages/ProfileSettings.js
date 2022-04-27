@@ -18,15 +18,24 @@ const ProfileSettings = () => {
   const ChangeHandler = (e) => {
     let file = e.target.files[0];
 
+    // Reference: https://stackoverflow.com/a/23633850/14892434
+    let combining = /[\u0300-\u036F]/g;
+    let filename = file.name.normalize("NFKD").replace(combining, "");
+    // console.log(filename);
+
     const formData = new FormData();
-    formData.append("image", file, file.name);
+    formData.append("image", file, filename);
 
     api
-      .put(`/api/profile/${user.user_id}/update/image/`, formData, {
-        headers: {
-          "Content-Disposition": `attachment; filename=${file.name}`,
-        },
-      })
+      .put(
+        `/api/profile/${user.user_id}/update/image/`,
+        formData
+        // {
+        //   headers: {
+        //     "Content-Disposition": `attachment; filename=${filename}`,
+        //   },
+        // }
+      )
       .then((res) => {
         // Success
         console.log(res);
