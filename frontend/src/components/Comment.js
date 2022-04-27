@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useAnonimAxios } from "../utils/useAxios";
 import Reply from "./Reply";
 import Settings from "../Settings";
+import { Link } from "react-router-dom";
 // import { useAuthContext } from "../context/AuthContext";
 // import DeleteCommentModal from "./modals/DeleteCommentModal";
 
@@ -16,7 +17,6 @@ const Comment = ({ commentData }) => {
       .get(`/api/profile/${author}/`)
       .then((res) => {
         setUserData(res.data);
-        // console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -25,16 +25,29 @@ const Comment = ({ commentData }) => {
 
   return (
     <div className="media d-flex mb-2" id="comment">
-      <img
-        className="mr-3 rounded-circle"
-        alt=""
-        src={userData && Settings().BASE_URL + userData.image}
-        style={{ width: "60px", height: "60px" }}
-      />
+      <Link to={userData ? `/profile/${userData.user}` : ""}>
+        <img
+          className="mr-3 rounded-circle"
+          alt=""
+          src={userData && Settings().BASE_URL + userData.image}
+          style={{ width: "60px", height: "60px" }}
+        />
+      </Link>
       <div className="media-body ms-4 flex-grow-1">
         <div className="row">
           <div className="col-8 d-flex">
-            <h5>{userData ? userData.full_name : ""}</h5>
+            <Link
+              to={userData ? `/profile/${userData.user}` : ""}
+              className="text-decoration-none"
+            >
+              <h5>
+                {userData
+                  ? userData.full_name !== ""
+                    ? userData.full_name
+                    : userData.username
+                  : ""}
+              </h5>
+            </Link>
           </div>
         </div>
         <p>{content}</p>
