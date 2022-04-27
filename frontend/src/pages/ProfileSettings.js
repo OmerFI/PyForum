@@ -17,7 +17,6 @@ const ProfileSettings = () => {
 
   const ChangeHandler = (e) => {
     let file = e.target.files[0];
-    document.getElementById("profile-image").src = URL.createObjectURL(file);
 
     const formData = new FormData();
     formData.append("image", file, file.name);
@@ -29,8 +28,11 @@ const ProfileSettings = () => {
         },
       })
       .then((res) => {
+        // Success
         console.log(res);
         setProfileImageUpdateSuccess(true);
+        document.getElementById("profile-image").src =
+          URL.createObjectURL(file);
         setTimeout(() => {
           setProfileImageUpdateSuccess(null);
         }, 3000);
@@ -38,6 +40,8 @@ const ProfileSettings = () => {
         return res;
       })
       .catch((err) => {
+        // Error
+        console.log(err);
         setProfileImageUpdateSuccess(false);
         setTimeout(() => {
           setProfileImageUpdateSuccess(null);
