@@ -78,6 +78,10 @@ class ProfileUpdateImageView(APIView):
         return Profile.objects.get(user_id=self.kwargs.get("user_id"))
 
     def put(self, request, *args, **kwargs):
+        print("====================")
+        print(request)
+        print(request.data)
+        print("====================")
         try:
             image_obj = request.data["image"]
         except Exception as e:
