@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from datetime import timedelta
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,15 +23,15 @@ BASE_DIR_FRONTEND = BASE_DIR.parent / 'frontend'
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-p%d)6s98otck#xy)gt)&gqf@6as_)@uku3*x7dsj&8x6xto6j*'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-p%d)6s98otck#xy)gt)&gqf@6as_)@uku3*x7dsj&8x6xto6j*')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 if DEBUG:
-    ALLOWED_HOSTS = ['*']
+    ALLOWED_HOSTS += ['*']
 
 
 # Application definition
@@ -66,7 +67,7 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(days=5), # 5 minutes
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5), # 5 minutes
     'REFRESH_TOKEN_LIFETIME': timedelta(days=90),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
