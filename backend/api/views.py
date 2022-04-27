@@ -18,6 +18,7 @@ from rest_framework.generics import (
 )
 from rest_framework import mixins
 from rest_framework.parsers import MultiPartParser, FileUploadParser
+from rest_framework.exceptions import NotAcceptable
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -83,7 +84,7 @@ class ProfileUpdateImageView(APIView):
             try:
                 image_obj = request.data["file"]
             except:
-                raise HttpResponseBadRequest("No image provided!")
+                raise NotAcceptable(detail="No image provided!")
         image_name = image_obj.name
         profile = self.get_object()
         profile.image.save(image_name, image_obj)
