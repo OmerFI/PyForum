@@ -39,7 +39,7 @@ class ProfileSerializer(ModelSerializer):
         return obj.user.username
 
     def get_full_name(self, obj):
-        full_name = f"{obj.first_name} {obj.last_name}"
+        full_name = f"{obj.first_name} {obj.last_name}".strip()
         return full_name
 
     def get_posts(self, obj):
