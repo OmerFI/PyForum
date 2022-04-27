@@ -2,6 +2,7 @@ import useAxios, { useAnonimAxios } from "../../utils/useAxios";
 import { useState, useEffect } from "react";
 import { useAuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import RefreshPage from "../../utils/Page";
 
 const CreateCategoryModal = () => {
   let [categoryData, setCategoryData] = useState([]);
@@ -66,6 +67,7 @@ const CreateCategoryModal = () => {
                         )
                         .click();
                       navigate(`/category/${categoryData.id}/`);
+                      RefreshPage();
                     }, 2000);
                   })
                   .catch((err) => {
