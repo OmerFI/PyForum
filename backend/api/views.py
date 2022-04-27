@@ -1,4 +1,4 @@
-from django.http import Http404
+from django.http import Http404, HttpResponseBadRequest
 from rest_framework.response import Response
 from rest_framework.permissions import (
     IsAuthenticated,
@@ -77,7 +77,13 @@ class ProfileUpdateImageView(APIView):
         return Profile.objects.get(user_id=self.kwargs.get("user_id"))
 
     def put(self, request, *args, **kwargs):
-        image_obj = request.data["image"]
+        try:
+            image_obj = request.data["image"]
+        except:
+            try:
+                image_obj = request.data["file"]
+            except:
+                raise HttpResponseBadRequest("No image provided!")
         image_name = image_obj.name
         profile = self.get_object()
         profile.image.save(image_name, image_obj)
