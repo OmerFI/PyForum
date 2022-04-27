@@ -80,10 +80,17 @@ class ProfileUpdateImageView(APIView):
     def put(self, request, *args, **kwargs):
         try:
             image_obj = request.data["image"]
-        except:
+        except Exception as e:
+            print("====================")
+            print(e)
+            print("====================")
             try:
                 image_obj = request.data["file"]
-            except:
+            except Exception as e:
+                print("====================")
+                print(e)
+                print("====================")
+
                 raise NotAcceptable(detail="No image provided!")
         image_name = image_obj.name
         profile = self.get_object()
