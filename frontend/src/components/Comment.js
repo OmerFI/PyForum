@@ -2,14 +2,14 @@ import { useState, useEffect } from "react";
 import { useAnonimAxios } from "../utils/useAxios";
 import Reply from "./Reply";
 import Settings from "../Settings";
-import { useAuthContext } from "../context/AuthContext";
-import DeleteCommentModal from "./modals/DeleteCommentModal";
+// import { useAuthContext } from "../context/AuthContext";
+// import DeleteCommentModal from "./modals/DeleteCommentModal";
 
 const Comment = ({ commentData }) => {
   let { author, content, replies } = commentData;
   let anonimApi = useAnonimAxios();
   let [userData, setUserData] = useState(null);
-  let { user } = useAuthContext();
+  // let { user } = useAuthContext();
 
   useEffect(() => {
     anonimApi
@@ -27,6 +27,7 @@ const Comment = ({ commentData }) => {
     <div className="media d-flex mb-2" id="comment">
       <img
         className="mr-3 rounded-circle"
+        alt=""
         src={userData && Settings().BASE_URL + userData.image}
         style={{ width: "60px", height: "60px" }}
       />
