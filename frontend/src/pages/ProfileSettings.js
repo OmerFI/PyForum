@@ -21,21 +21,21 @@ const ProfileSettings = () => {
     // Reference: https://stackoverflow.com/a/23633850/14892434
     let combining = /[\u0300-\u036F]/g;
     let filename = file.name.normalize("NFKD").replace(combining, "");
-    // console.log(filename);
+    // Reference: https://stackoverflow.com/a/20856346/14892434
+    filename = filename.replace(/[^\x00-\x7F]/g, "");
+    if (filename === "") {
+      filename = "profile_image";
+    }
 
     const formData = new FormData();
     formData.append("image", file, filename);
 
     api
-      .put(
-        `/api/profile/${user.user_id}/update/image/`,
-        formData
-        // {
-        //   headers: {
-        //     "Content-Disposition": `attachment; filename=${filename}`,
-        //   },
-        // }
-      )
+      .put(`/api/profile/${user.user_id}/update/image/`, formData, {
+        headers: {
+          "Content-Disposition": `attachment; filename=${filename}`,
+        },
+      })
       .then((res) => {
         // Success
         console.log(res);
@@ -61,7 +61,7 @@ const ProfileSettings = () => {
 
   const GetProfile = async () => {
     let response = api
-      .get(`/api/profile/${user.user_id}`)
+      .get(`/api/profile/${user.user_id}/`)
       .then((res) => {
         return res;
       })
