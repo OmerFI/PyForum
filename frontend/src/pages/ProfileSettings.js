@@ -34,6 +34,7 @@ const ProfileSettings = () => {
       .put(`/api/profile/${user.user_id}/update/image/`, formData, {
         headers: {
           "Content-Disposition": `attachment; filename=${filename}`,
+          "Content-Type": "multipart/form-data",
         },
       })
       .then((res) => {
