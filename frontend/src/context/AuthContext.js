@@ -70,7 +70,9 @@ export const AuthProvider = ({ children }) => {
         return response;
       })
       .catch((error) => {
-        return error.toJSON();
+        let errorJSON = error.toJSON();
+        errorJSON.data = error.response.data;
+        return errorJSON;
       });
     return response;
   };

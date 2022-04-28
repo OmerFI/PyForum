@@ -1,8 +1,5 @@
 import { useAuthContext } from "../../context/AuthContext";
 import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
-
-// import RefreshPage from "../../utils/Page";
 
 const RegisterModal = () => {
   const { registerUser } = useAuthContext();
@@ -11,8 +8,6 @@ const RegisterModal = () => {
   const [registerErrorMessage, setRegisterErrorMessage] = useState(
     "Lütfen tüm alanları doldurun."
   );
-
-  // let navigate = useNavigate();
 
   return (
     <div
@@ -41,11 +36,33 @@ const RegisterModal = () => {
               onSubmit={async (e) => {
                 e.preventDefault();
 
-                let response = await registerUser(
-                  e.target.username.value,
-                  e.target.email.value,
-                  e.target.password.value
-                );
+                let form = e.target;
+                let username = form.username.value;
+                let email = form.email.value;
+                let password = form.password.value;
+
+                let pattern = /^[\w.@+-]+$/;
+                if (!pattern.test(username)) {
+                  setRegisterErrorMessage(
+                    "Geçersiz kullanıcı adı girdiniz. Kullanıcı adı sadece harf, rakam, @, ., +, - ve _ işaretleri içerebilir."
+                  );
+                  setRegisterError(true);
+                  setTimeout(() => {
+                    setRegisterError(false);
+                  }, 3000);
+                  return;
+                }
+
+                if (password.length < 8) {
+                  setRegisterErrorMessage("Şifre en az 8 karakter olmalıdır.");
+                  setRegisterError(true);
+                  setTimeout(() => {
+                    setRegisterError(false);
+                  }, 3000);
+                  return;
+                }
+
+                let response = await registerUser(username, email, password);
 
                 if (response.message === "Network Error") {
                   // server error
@@ -56,18 +73,23 @@ const RegisterModal = () => {
 
                 if (response.status === 400) {
                   // Bad request
+                  if (response.data.username) {
+                    setRegisterErrorMessage(
+                      "Kullanıcı adı bir başkası tarafından kullanılıyor!"
+                    );
+                  } else if (response.data.email) {
+                    setRegisterErrorMessage(
+                      "E-posta adresi bir başkası tarafından kullanılıyor!"
+                    );
+                  } else {
+                    setRegisterErrorMessage("Lütfen tüm alanları doldurun.");
+                  }
                   setRegisterError(true);
-                  console.log(
-                    "Kullanıcı adı bir başkası tarafından kullanılıyor!"
-                  );
-                  setRegisterErrorMessage(
-                    "Kullanıcı adı bir başkası tarafından kullanılıyor!"
-                  );
+                  setTimeout(() => {
+                    setRegisterError(false);
+                  }, 3000);
                   return;
                 }
-                setRegisterError(null);
-                // RefreshPage();
-                // navigate("/profile/settings");
               }}
             >
               <input
