@@ -24,13 +24,6 @@ class Profile(models.Model):
     def __str__(self):
         return f"{self.user.username} Profile"
 
-    # update user's first name and last name on profile update
-    def save(self, *args, **kwargs):
-        self.user.first_name = self.first_name
-        self.user.last_name = self.last_name
-        self.user.save()
-        super().save(*args, **kwargs)
-
 
 # --- Post ---
 
