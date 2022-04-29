@@ -2,9 +2,12 @@
 
 PyForum is a full-stack web application made using **Django** on the backend and **React** on the frontend.
 
-Requires `Python 3.6+` and `Nodejs`.
+![](images/index.png)
+![](images/detail.png)
 
 ## How to test
+
+Requires `Python 3.6+` and `Nodejs`.
 
 ```bash
 git clone https://github.com/OmerFI/PyForum.git
@@ -13,9 +16,17 @@ npm install
 npm run build
 cd ../backend
 pip install -r requirements.txt
-python3 manage.py collectstatic
+python3 manage.py collectstatic --noinput
 python3 manage.py migrate
 python3 manage.py runserver
+```
+
+There are no categories by default, but if you are admin user, you can create them by clicking on the `Yeni Kategori` button in the top right corner.
+
+You can create a admin user using following command:
+
+```bash
+python3 manage.py createsuperuser
 ```
 
 Note: This site's language is `Turkish`
