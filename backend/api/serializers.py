@@ -1,9 +1,27 @@
 from rest_framework.serializers import ModelSerializer, SerializerMethodField
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import generics
 from django.contrib.auth import get_user_model
 from base.models import Profile, Category, Post, Comment, Reply
 
+
 User = get_user_model()
+
+# --- Authentication ---
+
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+
+        # Add custom claims
+        token["username"] = user.username
+        token["is_admin"] = user.is_staff
+        # ...
+
+        return token
+
 
 # --- User ---
 

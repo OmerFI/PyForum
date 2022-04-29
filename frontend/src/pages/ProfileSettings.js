@@ -31,7 +31,7 @@ const ProfileSettings = () => {
     formData.append("image", file, filename);
 
     api
-      .put(`/api/profile/${user.user_id}/update/image/`, formData, {
+      .put(`/api/profile/update/image/`, formData, {
         headers: {
           "Content-Disposition": `attachment; filename=${filename}`,
         },
@@ -82,7 +82,7 @@ const ProfileSettings = () => {
 
   const UpdateProfile = async (first_name, last_name) => {
     let response = api
-      .put(`/api/profile/${user.user_id}/update/`, { first_name, last_name })
+      .put(`/api/profile/update/`, { first_name, last_name })
       .then((res) => {
         return res;
       })

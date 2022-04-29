@@ -11,12 +11,12 @@ urlpatterns = [
     path("users/register/", views.RegisterView.as_view(), name="register"),
     path("profile/<uuid:user_id>/", views.ProfileView.as_view(), name="profile"),
     path(
-        "profile/<uuid:user_id>/update/",
+        "profile/update/",
         views.ProfileUpdateView.as_view(),
         name="profile_update",
     ),
     path(
-        "profile/<uuid:user_id>/update/image/",
+        "profile/update/image/",
         views.ProfileUpdateImageView.as_view(),
         name="profile_update_image",
     ),

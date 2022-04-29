@@ -1,24 +1,19 @@
 from django.http import Http404
 from rest_framework.response import Response
 from rest_framework.permissions import (
-    IsAuthenticated,
-    IsAuthenticatedOrReadOnly,
     IsAdminUser,
-    BasePermission,
-    SAFE_METHODS,
 )
+from .permissions import IsAuthenticated, IsAuthenticatedOrReadOnly, ReadOnly
 
 from rest_framework.views import APIView
 from rest_framework.generics import (
-    GenericAPIView,
     CreateAPIView,
     UpdateAPIView,
 )
-from rest_framework import mixins
+from .generics import ListCreateUpdateDestroyAPIView, ListUpdateDestroyAPIView
 from rest_framework.parsers import MultiPartParser, FileUploadParser
 from rest_framework.exceptions import NotAcceptable
 
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from base.models import Profile
@@ -27,19 +22,6 @@ from .serializers import *
 
 
 # --- Authentication ---
-
-
-class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
-    @classmethod
-    def get_token(cls, user):
-        token = super().get_token(user)
-
-        # Add custom claims
-        token["username"] = user.username
-        token["is_admin"] = user.is_staff
-        # ...
-
-        return token
 
 
 class MyTokenObtainPairView(TokenObtainPairView):
@@ -65,7 +47,7 @@ class ProfileUpdateView(UpdateAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_object(self):
-        return Profile.objects.get(user_id=self.kwargs.get("user_id"))
+        return Profile.objects.get(user_id=self.request.user.id)
 
 
 class ProfileUpdateImageView(APIView):
@@ -73,7 +55,7 @@ class ProfileUpdateImageView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get_object(self):
-        return Profile.objects.get(user_id=self.kwargs.get("user_id"))
+        return Profile.objects.get(user_id=self.request.user.id)
 
     def put(self, request, *args, **kwargs):
         try:
@@ -89,37 +71,6 @@ class ProfileUpdateImageView(APIView):
         profile.save()
 
         return Response({"message": "Image updated"})
-
-
-# --- Utils ---
-
-
-class ListCreateUpdateDestroyAPIView(
-    mixins.ListModelMixin,
-    mixins.CreateModelMixin,
-    mixins.UpdateModelMixin,
-    mixins.DestroyModelMixin,
-    GenericAPIView,
-):
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
-
-    def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
-
-    def put(self, request, *args, **kwargs):
-        return self.update(request, *args, **kwargs)
-
-    def patch(self, request, *args, **kwargs):
-        return self.partial_update(request, *args, **kwargs)
-
-    def delete(self, request, *args, **kwargs):
-        return self.destroy(request, *args, **kwargs)
-
-
-class ReadOnly(BasePermission):
-    def has_permission(self, request, view):
-        return request.method in SAFE_METHODS
 
 
 # --- Main ---
@@ -171,9 +122,13 @@ class PostView(ListCreateUpdateDestroyAPIView):
             posts = None
         return posts
 
+    def create(self, request, *args, **kwargs):
+        request.data["author"] = request.user.id
+        return super().create(request, *args, **kwargs)
+
     def get_object(self):
         try:
-            post = Post.objects.get(id=self.request.data.get("id"))
+            post = Post.objects.get(id=self.request.user.id)
         except Exception as e:
             print(e)
             raise Http404
@@ -193,7 +148,8 @@ class CommentView(ListCreateUpdateDestroyAPIView):
 
     def get_object(self):
         try:
-            comment = Comment.objects.get(id=self.request.data.get("id"))
+            comment = Comment.objects.get(id=self.request.user.id)
+            # comment = Comment.objects.get(id=self.request.data.get("id"))
         except Exception as e:
             print(e)
             raise Http404
