@@ -93,7 +93,8 @@ const CreatePostModal = () => {
                 id="title"
                 placeholder="Başlık"
                 required="required"
-                maxLength={500}
+                maxLength={100}
+                minLength={10}
               />
               <input
                 type="text"
@@ -102,6 +103,7 @@ const CreatePostModal = () => {
                 placeholder="İçerik"
                 required="required"
                 maxLength={500}
+                minLength={15}
               />
               <select
                 className="form-select bg-dark text-white mb-3 p-2"

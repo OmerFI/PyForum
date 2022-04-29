@@ -1,6 +1,6 @@
 from django.db import models
+from django.core.validators import MinLengthValidator
 from django.contrib.auth.models import AbstractUser
-from django.conf import settings
 from django.contrib.auth import get_user_model
 
 import uuid
@@ -31,7 +31,7 @@ class Profile(models.Model):
 class Reply(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    content = models.TextField(max_length=500)
+    content = models.TextField(max_length=200, validators=[MinLengthValidator(5)])
     created_at = models.DateTimeField(auto_now_add=True)
     owner_comment = models.ForeignKey("Comment", on_delete=models.CASCADE)
 
@@ -45,7 +45,7 @@ class Reply(models.Model):
 class Comment(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    content = models.TextField(max_length=500)
+    content = models.TextField(max_length=200, validators=[MinLengthValidator(5)])
     created_at = models.DateTimeField(auto_now_add=True)
     replies = models.ManyToManyField(Reply, blank=True)
     owner_post = models.ForeignKey("Post", on_delete=models.CASCADE)
@@ -57,8 +57,10 @@ class Comment(models.Model):
 class Post(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    title = models.CharField(max_length=100, unique=True)
-    content = models.TextField(max_length=500)
+    title = models.CharField(
+        max_length=100, unique=True, validators=[MinLengthValidator(10)]
+    )
+    content = models.TextField(max_length=500, validators=[MinLengthValidator(15)])
     created_at = models.DateTimeField(auto_now_add=True)
     comments = models.ManyToManyField(Comment, blank=True)
     owner_category = models.ForeignKey("Category", on_delete=models.CASCADE)

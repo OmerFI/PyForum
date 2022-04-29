@@ -132,6 +132,8 @@ const PostDetails = () => {
                   id="comment"
                   rows="3"
                   placeholder="Yorumunuzu giriniz..."
+                  minLength={5}
+                  maxLength={200}
                 ></textarea>
               </div>
 
