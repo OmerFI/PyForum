@@ -73,14 +73,8 @@ const PostDetails = () => {
                   {/*  Comments */}
                   {commentData &&
                     commentData.map((comment) => {
-                      // console.log("====================================");
-                      // console.log(comment);
-                      // console.log(comment.id);
-                      // comment = { ...comment, categoryId, postId };
                       comment.categoryId = categoryId;
                       comment.postId = postId;
-                      // console.log(comment);
-                      // console.log("====================================");
                       return <Comment key={comment.id} commentData={comment} />;
                     })}
                 </div>
@@ -93,13 +87,10 @@ const PostDetails = () => {
           onSubmit={(e) => {
             e.preventDefault();
             let content = e.target.comment.value;
-            let author = user.user_id;
 
             api
               .post(`/api/category/${categoryId}/${postId}/`, {
-                author,
                 content,
-                owner_post: postId,
               })
               .then(() => {
                 // Success

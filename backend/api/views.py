@@ -2,8 +2,10 @@ from django.http import Http404
 from rest_framework.response import Response
 from rest_framework.permissions import (
     IsAdminUser,
+    IsAuthenticated,
+    IsAuthenticatedOrReadOnly,
 )
-from .permissions import IsAuthenticated, IsAuthenticatedOrReadOnly, ReadOnly
+from .permissions import ReadOnly
 
 from rest_framework.views import APIView
 from rest_framework.generics import (
@@ -19,6 +21,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from base.models import Profile
 
 from .serializers import *
+from .utils import RequestDataChanger
 
 
 # --- Authentication ---
@@ -123,7 +126,9 @@ class PostView(ListCreateUpdateDestroyAPIView):
         return posts
 
     def create(self, request, *args, **kwargs):
-        request.data["author"] = request.user.id
+        with RequestDataChanger(request.data):
+            request.data["author"] = request.user.id
+            request.data["owner_category"] = self.kwargs.get("category_id")
         return super().create(request, *args, **kwargs)
 
     def get_object(self):
@@ -146,10 +151,17 @@ class CommentView(ListCreateUpdateDestroyAPIView):
             comments = None
         return comments
 
+    def create(self, request, *args, **kwargs):
+        with RequestDataChanger(request.data):
+            request.data["author"] = request.user.id
+            request.data["owner_post"] = self.kwargs.get("post_id")
+        return super().create(request, *args, **kwargs)
+
     def get_object(self):
         try:
-            comment = Comment.objects.get(id=self.request.user.id)
-            # comment = Comment.objects.get(id=self.request.data.get("id"))
+            comment = Comment.objects.get(
+                author=self.request.user.id, id=self.request.data.get("id")
+            )
         except Exception as e:
             print(e)
             raise Http404

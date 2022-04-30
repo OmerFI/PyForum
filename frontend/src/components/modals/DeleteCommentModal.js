@@ -1,7 +1,13 @@
 import useAxios from "../../utils/useAxios";
 import RefreshPage from "../../utils/Page";
+import { useState } from "react";
 
 const DeleteCommentModal = ({ commentData }) => {
+  const [deleteCommentError, setDeleteCommentError] = useState(null);
+  const [deleteCommentErrorMessage, setDeleteCommentErrorMessage] = useState(
+    "Yorum silinirken bir hata oluştu."
+  );
+
   let commentId = commentData.id;
   let categoryId = commentData.categoryId;
   let postId = commentData.postId;
@@ -37,6 +43,16 @@ const DeleteCommentModal = ({ commentData }) => {
               </p>
             </div>
             <div className="modal-footer">
+              {deleteCommentError === false ? (
+                <div className="alert alert-success" role="alert">
+                  Yorum başarıyla silindi.
+                </div>
+              ) : deleteCommentError === true ? (
+                <div className="alert alert-danger" role="alert">
+                  {deleteCommentErrorMessage}
+                </div>
+              ) : null}
+
               <button
                 type="button"
                 className="btn btn-secondary"
@@ -49,24 +65,30 @@ const DeleteCommentModal = ({ commentData }) => {
                 className="btn btn-danger"
                 onClick={(e) => {
                   e.preventDefault();
-                  console.log("====================");
-                  console.log("commentData", commentData);
-                  console.log("commentId", commentData.id);
-                  console.log("categoryId", categoryId);
-                  console.log("====================");
                   api
                     .delete(`/api/category/${categoryId}/${postId}/`, {
-                      data: { id: commentId },
+                      data: {
+                        id: commentId,
+                      },
                     })
                     .then(() => {
                       // Success
+                      setDeleteCommentError(false);
                       setTimeout(() => {
+                        setDeleteCommentError(null);
                         RefreshPage();
                       }, 2000);
                     })
                     .catch((err) => {
                       // Error
                       console.log(err);
+                      setDeleteCommentErrorMessage(
+                        "Yorum silinirken bir hata oluştu."
+                      );
+                      setDeleteCommentError(true);
+                      setTimeout(() => {
+                        setDeleteCommentError(null);
+                      }, 2000);
                     });
                 }}
               >

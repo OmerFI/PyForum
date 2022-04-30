@@ -1,6 +1,5 @@
 import useAxios, { useAnonimAxios } from "../../utils/useAxios";
 import { useState, useEffect } from "react";
-import { useAuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const CreatePostModal = () => {
@@ -9,7 +8,6 @@ const CreatePostModal = () => {
   const [createPostErrorMessage, setCreatePostErrorMessage] = useState(
     "Gönderi oluşturulurken bir hata oluştu."
   );
-  const { user } = useAuthContext();
   const navigate = useNavigate();
 
   let anonimApi = useAnonimAxios();
@@ -48,17 +46,14 @@ const CreatePostModal = () => {
               onSubmit={(e) => {
                 e.preventDefault();
 
-                let author = user.user_id;
                 let title = e.target.title.value;
                 let content = e.target.content.value;
                 let categoryId = e.target.category.value;
 
                 api
                   .post(`/api/category/${categoryId}/`, {
-                    author,
                     title,
                     content,
-                    owner_category: categoryId,
                   })
                   .then((res) => {
                     // Success
@@ -111,7 +106,6 @@ const CreatePostModal = () => {
                 aria-label="Default select example"
                 required="required"
               >
-                {/* <option selected>Kategori</option> */}
                 {categoryData.map((category) => (
                   <option key={category.id} value={category.id}>
                     {category.title}

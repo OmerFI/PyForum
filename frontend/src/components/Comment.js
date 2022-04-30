@@ -3,14 +3,15 @@ import { useAnonimAxios } from "../utils/useAxios";
 import Reply from "./Reply";
 import Settings from "../Settings";
 import { Link } from "react-router-dom";
-// import { useAuthContext } from "../context/AuthContext";
-// import DeleteCommentModal from "./modals/DeleteCommentModal";
+import { useAuthContext } from "../context/AuthContext";
+import DeleteCommentModal from "./modals/DeleteCommentModal";
 
 const Comment = ({ commentData }) => {
-  let { author, content, replies } = commentData;
-  let anonimApi = useAnonimAxios();
+  let { author, content, replies, id: commentId } = commentData;
   let [userData, setUserData] = useState(null);
-  // let { user } = useAuthContext();
+  let { user } = useAuthContext();
+
+  let anonimApi = useAnonimAxios();
 
   useEffect(() => {
     anonimApi
@@ -57,7 +58,7 @@ const Comment = ({ commentData }) => {
           ))}
         </div>
       </div>
-      {/* {user && user.user_id === author && (
+      {commentId && user && user.user_id === author && (
         <div className="p-3">
           <button
             className="btn btn-danger"
@@ -68,7 +69,7 @@ const Comment = ({ commentData }) => {
           </button>
           <DeleteCommentModal commentData={commentData} />
         </div>
-      )} */}
+      )}
     </div>
   );
 };
