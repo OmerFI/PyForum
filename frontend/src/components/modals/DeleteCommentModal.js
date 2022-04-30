@@ -18,7 +18,7 @@ const DeleteCommentModal = ({ commentData }) => {
     <div>
       <div
         className="modal fade"
-        id="deleteCommentModal"
+        id={"deleteCommentModal-" + commentId}
         tabIndex={-1}
         aria-labelledby="modalTitle"
         aria-hidden="true"
@@ -65,6 +65,7 @@ const DeleteCommentModal = ({ commentData }) => {
                 className="btn btn-danger"
                 onClick={(e) => {
                   e.preventDefault();
+
                   api
                     .delete(`/api/category/${categoryId}/${postId}/`, {
                       data: {

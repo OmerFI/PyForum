@@ -7,9 +7,21 @@ import { useAuthContext } from "../context/AuthContext";
 import DeleteCommentModal from "./modals/DeleteCommentModal";
 
 const Comment = ({ commentData }) => {
-  let { author, content, replies, id: commentId } = commentData;
+  let {
+    author,
+    content,
+    replies,
+    id: commentId,
+    categoryId,
+    postId,
+  } = commentData;
   let [userData, setUserData] = useState(null);
   let { user } = useAuthContext();
+
+  const [deleteCommentError, setDeleteCommentError] = useState(null);
+  const [deleteCommentErrorMessage, setDeleteCommentErrorMessage] = useState(
+    "Yorum silinirken bir hata oluştu."
+  );
 
   let anonimApi = useAnonimAxios();
 
@@ -58,12 +70,13 @@ const Comment = ({ commentData }) => {
           ))}
         </div>
       </div>
+
       {commentId && user && user.user_id === author && (
         <div className="p-3">
           <button
             className="btn btn-danger"
             data-bs-toggle="modal"
-            data-bs-target="#deleteCommentModal"
+            data-bs-target={"#deleteCommentModal-" + commentId}
           >
             Yorumu Sil
           </button>
