@@ -1,3 +1,6 @@
+backend/static
+backend/media/profile_pics
+
 # --- Python Gitignore Template ---
 
 # Byte-compiled / optimized / DLL files
