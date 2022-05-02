@@ -27,7 +27,7 @@ body {
 /* ---FROM BOOTSTRAP EXAMPLE TEMPLATE--- */
 
 a {
-  text-decoration: none;
+  text-decoration: none !important;
   --bs-text-opacity: 1;
   color: rgba(var(--bs-white-rgb), var(--bs-text-opacity)) !important;
 }
