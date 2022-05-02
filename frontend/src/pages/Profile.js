@@ -51,6 +51,14 @@ const Profile = () => {
         <div className="category-posts pt-3">
           <h2 className="mb-4">Gönderiler</h2>
           <div className="shadow">
+            {userData && userData.posts.length === 0 ? (
+              <div className="text-left">
+                <small className="text-white-50">
+                  Daha önce herhangi bir gönderi yayınlamadı.
+                </small>
+              </div>
+            ) : null}
+
             {userData &&
               userData.posts.map((post) => {
                 delete post.username;
