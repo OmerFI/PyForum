@@ -38,13 +38,7 @@ const Profile = () => {
             height={200}
             id="profile-image"
           />
-          <input
-            type="file"
-            name="file"
-            id="file"
-            className="d-none"
-            accept="image/jpeg,image/png"
-          />
+
           <p>{userData ? userData.full_name : ""}</p>
         </div>
 
