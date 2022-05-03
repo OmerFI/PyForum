@@ -20,9 +20,9 @@ python3 manage.py migrate
 python3 manage.py runserver
 ```
 
-There are no categories by default, but if you are admin user, you can create them by clicking on the `Yeni Kategori` button in the top right corner.
+There are no categories by default, but if you are an admin user, you can create them by clicking on the `Yeni Kategori` button in the top right corner.
 
-You can create a admin user using following command:
+You can create an admin user using the following command:
 
 ```bash
 python3 manage.py createsuperuser
