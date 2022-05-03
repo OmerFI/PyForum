@@ -33,8 +33,9 @@ Note: This site's language is `Turkish`
 ### Features:
 
 - Users can register and log in.
-- Users can create a post in categories
-- Any user can comment in the post.
+- Users can create a post in categories.
+- Any user can comment in a post.
+- Users can delete their comments.
 - Every user has a profile and in the profile, there are posts which the user has posted.
 - Users can edit his profile image, firstname and surname.
 - In main page, there are categories and posts. Each category has maximum 5 posts in main page. If there are more than 5 posts, then a link to the category details page appears.
