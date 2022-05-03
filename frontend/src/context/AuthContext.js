@@ -7,7 +7,7 @@ import RefreshPage from "../utils/Page";
 import { useNavigate } from "react-router-dom";
 import Settings from "../Settings";
 
-const AuthContext = React.createContext();
+export const AuthContext = React.createContext();
 
 export const useAuthContext = () => {
   return useContext(AuthContext);

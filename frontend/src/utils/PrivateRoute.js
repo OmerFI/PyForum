@@ -1,14 +1,23 @@
+import React, { Component } from "react";
 import { Navigate } from "react-router-dom";
-import { useAuthContext } from "../context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 
-const PrivateRoute = ({ children }) => {
-  let { user } = useAuthContext();
+class PrivateRoute extends Component {
+  static contextType = AuthContext;
+  static defaultProps = {
+    redirect: "/",
+  };
 
-  if (user) {
-    return children;
-  } else {
-    return <Navigate to="/" />;
+  render() {
+    const { children, redirect } = this.props;
+    let { user } = this.context;
+
+    if (user) {
+      return children;
+    } else {
+      return <Navigate to={redirect} />;
+    }
   }
-};
+}
 
 export default PrivateRoute;

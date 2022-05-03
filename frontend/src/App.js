@@ -1,6 +1,4 @@
 import "./App.css";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
 
 import HomePage from "./pages/HomePage";
 import Profile from "./pages/Profile";
@@ -10,7 +8,7 @@ import CategoryDetails from "./pages/CategoryDetails";
 import { AuthProvider } from "./context/AuthContext";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import PrivateRoute from "./utils/PrivateRoute";
+import RouteController from "./utils/RouteController";
 import PostDetails from "./pages/PostDetails";
 
 function App() {
@@ -18,30 +16,51 @@ function App() {
     <div className="App">
       <Router>
         <AuthProvider>
-          <Header />
-
           <Routes>
-            <Route path="/" element={<HomePage />}></Route>
+            <Route
+              path="/"
+              element={
+                <RouteController>
+                  <HomePage />
+                </RouteController>
+              }
+            ></Route>
             <Route
               path="/profile/settings"
               element={
-                <PrivateRoute>
+                <RouteController
+                  isPrivateRoute={true}
+                  privateRouteRedirect={"/"}
+                >
                   <ProfileSettings />
-                </PrivateRoute>
+                </RouteController>
               }
             ></Route>
-            <Route path="/profile/:profileId" element={<Profile />}></Route>
+            <Route
+              path="/profile/:profileId"
+              element={
+                <RouteController>
+                  <Profile />
+                </RouteController>
+              }
+            ></Route>
             <Route
               path="/category/:categoryId"
-              element={<CategoryDetails />}
+              element={
+                <RouteController>
+                  <CategoryDetails />
+                </RouteController>
+              }
             ></Route>
             <Route
               path="/category/:categoryId/:postId"
-              element={<PostDetails />}
+              element={
+                <RouteController>
+                  <PostDetails />
+                </RouteController>
+              }
             ></Route>
           </Routes>
-
-          <Footer />
         </AuthProvider>
       </Router>
     </div>
