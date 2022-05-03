@@ -42,4 +42,4 @@ Note: This site's language is `Turkish`
 
 ## Live Demo
 
-https://pyforum.tech/
+https://pyforum.tech
