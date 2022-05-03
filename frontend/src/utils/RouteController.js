@@ -25,7 +25,7 @@ class RouteController extends Component {
     } = this.props;
 
     return (
-      <div>
+      <>
         {includeHeader && header()}
         {isPrivateRoute ? (
           <PrivateRoute redirect={privateRouteRedirect}>
@@ -35,7 +35,7 @@ class RouteController extends Component {
           children
         )}
         {includeFooter && footer()}
-      </div>
+      </>
     );
   }
 }
