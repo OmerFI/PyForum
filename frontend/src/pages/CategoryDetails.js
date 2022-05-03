@@ -19,7 +19,9 @@ const CategoryDetails = () => {
         setTitle(res.data[0].title);
       })
       .catch((err) => {
-        // console.log(err);
+        if (err.message !== "Request aborted") {
+          console.log(err);
+        }
         navigate("/");
       });
 
@@ -29,7 +31,9 @@ const CategoryDetails = () => {
         setPostData(res.data);
       })
       .catch((err) => {
-        // console.log(err);
+        if (err.message !== "Request aborted") {
+          console.log(err);
+        }
         navigate("/");
       });
   }, []);

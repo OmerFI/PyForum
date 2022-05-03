@@ -72,7 +72,9 @@ const CreateCategoryModal = () => {
                   })
                   .catch((err) => {
                     // Error
-                    console.log(err);
+                    if (err.message !== "Request aborted") {
+                      console.log(err);
+                    }
                     setCreateCategoryError(true);
                     setCreateCategoryErrorMessage(
                       "Kategori oluşturulurken bir hata oluştu."

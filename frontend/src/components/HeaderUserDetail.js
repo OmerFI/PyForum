@@ -22,7 +22,9 @@ const HeaderUserDetail = () => {
         return res;
       })
       .catch((err) => {
-        console.log(err);
+        if (err.message !== "Request aborted") {
+          console.log(err);
+        }
         return err;
       });
     return response;

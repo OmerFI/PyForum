@@ -45,12 +45,13 @@ const ProfileSettings = () => {
         setTimeout(() => {
           setProfileImageUpdateSuccess(null);
         }, 3000);
-        // RefreshPage();
         return res;
       })
       .catch((err) => {
         // Error
-        console.log(err);
+        if (err.message !== "Request aborted") {
+          console.log(err);
+        }
         setProfileImageUpdateSuccess(false);
         setTimeout(() => {
           setProfileImageUpdateSuccess(null);
@@ -66,7 +67,9 @@ const ProfileSettings = () => {
         return res;
       })
       .catch((err) => {
-        console.log(err);
+        if (err.message !== "Request aborted") {
+          console.log(err);
+        }
         return err;
       });
     return response;

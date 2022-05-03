@@ -17,6 +17,9 @@ const Profile = () => {
         setUserData(res.data);
       })
       .catch((err) => {
+        if (err.message === "Request aborted") {
+          return;
+        }
         console.log(err);
       });
   }, []);

@@ -82,7 +82,9 @@ const DeleteCommentModal = ({ commentData }) => {
                     })
                     .catch((err) => {
                       // Error
-                      console.log(err);
+                      if (err.message !== "Request aborted") {
+                        console.log(err);
+                      }
                       setDeleteCommentErrorMessage(
                         "Yorum silinirken bir hata oluştu."
                       );

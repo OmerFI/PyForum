@@ -30,7 +30,9 @@ const PostDetails = () => {
         setTitle(res.data[0].title);
       })
       .catch((err) => {
-        // console.log(err);
+        if (err.message !== "Request aborted") {
+          console.log(err);
+        }
         navigate(`/category/${categoryId}`);
       });
 
@@ -40,7 +42,9 @@ const PostDetails = () => {
         setCommentData(res.data);
       })
       .catch((err) => {
-        // console.log(err);
+        if (err.message !== "Request aborted") {
+          console.log(err);
+        }
         navigate(`/category/${categoryId}`);
       });
   }, []);
@@ -110,6 +114,9 @@ const PostDetails = () => {
                   setCreateCommentError(null);
                 }, 2000);
 
+                if (err.message === "Request aborted") {
+                  return;
+                }
                 console.log(err);
               });
           }}

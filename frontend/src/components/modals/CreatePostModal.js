@@ -71,7 +71,9 @@ const CreatePostModal = () => {
                   })
                   .catch((err) => {
                     // Error
-                    console.log(err);
+                    if (err.message !== "Request aborted") {
+                      console.log(err);
+                    }
                     setCreatePostErrorMessage(
                       "Gönderi oluşturulurken bir hata oluştu."
                     );

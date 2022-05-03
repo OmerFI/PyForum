@@ -14,6 +14,9 @@ const Reply = ({ replyData }) => {
         setUserData(res.data);
       })
       .catch((err) => {
+        if (err.message === "Request aborted") {
+          return;
+        }
         console.log(err);
       });
   }, []);
