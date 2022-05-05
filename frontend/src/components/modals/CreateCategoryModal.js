@@ -1,26 +1,16 @@
-import useAxios, { useAnonimAxios } from "../../utils/useAxios";
-import { useState, useEffect } from "react";
-import { useAuthContext } from "../../context/AuthContext";
+import useAxios from "../../utils/useAxios";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import RefreshPage from "../../utils/Page";
 
 const CreateCategoryModal = () => {
-  let [categoryData, setCategoryData] = useState([]);
   const [createCategoryError, setCreateCategoryError] = useState(null);
   const [createCategoryErrorMessage, setCreateCategoryErrorMessage] = useState(
     "Kategori oluşturulurken bir hata oluştu."
   );
-  const { user } = useAuthContext();
   const navigate = useNavigate();
 
-  let anonimApi = useAnonimAxios();
   let api = useAxios();
-
-  useEffect(() => {
-    anonimApi.get("/api/category/").then((res) => {
-      setCategoryData(res.data);
-    });
-  }, []);
 
   return (
     <div
