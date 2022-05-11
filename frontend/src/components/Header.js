@@ -32,14 +32,20 @@ const Header = () => {
               </Link>
             </li>
             <li>
+              {/* TODO: Add latest posts url */}
               <Link to="#" className="nav-link px-2 link-light">
                 Son Gönderiler
               </Link>
             </li>
             <li>
-              <Link to="#" className="nav-link px-2 link-light">
+              <a
+                href="https://linktr.ee/omerfi"
+                target="_blank"
+                className="nav-link px-2 link-light"
+                rel="noreferrer"
+              >
                 Faydalı Kaynaklar
-              </Link>
+              </a>
             </li>
           </ul>
 
