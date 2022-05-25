@@ -1,14 +1,17 @@
+from msilib.schema import ListView
 from django.http import Http404
 from rest_framework.response import Response
 from rest_framework.permissions import (
     IsAdminUser,
     IsAuthenticated,
     IsAuthenticatedOrReadOnly,
+    AllowAny,
 )
 from .permissions import ReadOnly
 
 from rest_framework.views import APIView
 from rest_framework.generics import (
+    ListAPIView,
     CreateAPIView,
     UpdateAPIView,
 )
@@ -138,6 +141,20 @@ class PostView(ListCreateUpdateDestroyAPIView):
             print(e)
             raise Http404
         return post
+
+
+class LatestPostsView(ListAPIView):
+    serializer_class = PostSerializer
+    permission_classes = [AllowAny]
+
+    POST_COUNT = 10
+
+    def get_queryset(self):
+        try:
+            posts = Post.objects.all()[: self.POST_COUNT]
+        except Exception as e:
+            raise Http404
+        return posts
 
 
 class CommentView(ListCreateUpdateDestroyAPIView):

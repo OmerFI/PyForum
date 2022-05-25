@@ -32,8 +32,7 @@ const Header = () => {
               </Link>
             </li>
             <li>
-              {/* TODO: Add latest posts url */}
-              <Link to="#" className="nav-link px-2 link-light">
+              <Link to="/latest-posts" className="nav-link px-2 link-light">
                 Son Gönderiler
               </Link>
             </li>
