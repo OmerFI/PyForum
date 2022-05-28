@@ -101,20 +101,30 @@ class PostSerializer(ModelSerializer):
 
 class CommentSerializer(ModelSerializer):
     replies = SerializerMethodField()
+    owner_category = SerializerMethodField()
+    username = SerializerMethodField()
 
     class Meta:
         model = Comment
         fields = (
             "id",
             "author",
+            "username",
             "content",
             "created_at",
             "replies",
             "owner_post",
+            "owner_category",
         )
 
     def get_replies(self, obj):
         return ReplySerializer(obj.replies.all(), many=True).data
+
+    def get_owner_category(self, obj):
+        return obj.owner_post.owner_category.id
+
+    def get_username(self, obj):
+        return obj.author.username
 
 
 class ReplySerializer(ModelSerializer):

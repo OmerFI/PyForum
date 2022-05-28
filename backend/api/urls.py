@@ -34,6 +34,9 @@ urlpatterns = [
         name="reply",
     ),
     path("latest-posts/", views.LatestPostsView.as_view(), name="latest_posts"),
+    path(
+        "latest-comments/", views.LatestCommentsView.as_view(), name="latest_comments"
+    ),
     # --- Authentication ---
     path("token/", MyTokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),

@@ -184,6 +184,21 @@ class CommentView(ListCreateUpdateDestroyAPIView):
         return comment
 
 
+class LatestCommentsView(ListAPIView):
+    serializer_class = CommentSerializer
+    permission_classes = [AllowAny]
+
+    COMMENT_COUNT = 10
+
+    def get_queryset(self):
+        try:
+            all_comments = Comment.objects.all()
+            comments = all_comments[: len(all_comments) - self.COMMENT_COUNT - 1 : -1]
+        except Exception as e:
+            raise Http404
+        return comments
+
+
 class ReplyView(ListCreateUpdateDestroyAPIView):
     serializer_class = ReplySerializer
     permission_classes = [IsAuthenticatedOrReadOnly]

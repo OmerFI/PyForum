@@ -37,6 +37,11 @@ const Header = () => {
               </Link>
             </li>
             <li>
+              <Link to="/latest-comments" className="nav-link px-2 link-light">
+                Son Yorumlar
+              </Link>
+            </li>
+            <li>
               <a
                 href="https://linktr.ee/omerfi"
                 target="_blank"

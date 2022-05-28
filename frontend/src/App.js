@@ -5,6 +5,7 @@ import Profile from "./pages/Profile";
 import ProfileSettings from "./pages/ProfileSettings";
 import CategoryDetails from "./pages/CategoryDetails";
 import LatestPosts from "./pages/LatestPosts";
+import LatestComments from "./pages/LatestComments";
 
 import { AuthProvider } from "./context/AuthContext";
 
@@ -65,6 +66,12 @@ function App() {
               path="/latest-posts" element={
                 <RouteController>
                   <LatestPosts />
+                </RouteController>}>
+            </Route>
+            <Route
+              path="/latest-comments" element={
+                <RouteController>
+                  <LatestComments />
                 </RouteController>}>
             </Route>
           </Routes>
