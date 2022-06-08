@@ -46,13 +46,14 @@ const LoginModal = () => {
                   setLoginError(null);
                   RefreshPage();
                 } else {
-                  setLoginError(true);
-
                   if (response.message === "Network Error") {
                     // server error
                     setLoginErrorMessage("Sunucuya bağlanılamadı!");
-                    return;
                   }
+                  setLoginError(true);
+                  setTimeout(() => {
+                    setLoginError(false);
+                  }, 3000);
                 }
               }}
             >
