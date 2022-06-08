@@ -1,6 +1,7 @@
 import Icon from "./Icon";
 import CreateModals from "./CreateModals";
 import HeaderUserDetail from "./HeaderUserDetail";
+import "../Header.css";
 
 import { Link } from "react-router-dom";
 

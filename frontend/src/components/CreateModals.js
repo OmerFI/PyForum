@@ -7,7 +7,7 @@ const CreateModals = () => {
   const isAdmin = user && user.is_admin;
 
   return (
-    <div>
+    <div className="modals">
       <div className="buttons">
         {isAdmin ? (
           <button

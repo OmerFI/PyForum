@@ -1,0 +1,18 @@
+@media (max-width: 768px) {
+  header .dropdown {
+    margin-top: 12px;
+  }
+
+  header .modals {
+    width: 100%;
+  }
+
+  header .buttons {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  header .buttons > button {
+    margin: 0 !important;
+  }
+}
