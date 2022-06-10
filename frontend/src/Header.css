@@ -1,3 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+
+header .navbar-brand {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.1rem;
+}
+
+header span.brand-part1 {
+  color: #ffca2c;
+}
+
+header span.brand-part2 {
+  color: #00eeee;
+}
+
 @media (max-width: 768px) {
   header .dropdown {
     margin-top: 12px;
