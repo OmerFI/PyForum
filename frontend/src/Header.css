@@ -1,9 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;600;700&display=swap");
 
 header .navbar-brand {
-  font-family: "Poppins", sans-serif;
-  font-weight: 600;
-  letter-spacing: 0.1rem;
+  font-family: "Comfortaa", cursive;
+  font-weight: 700;
+  font-size: 1.5rem;
 }
 
 header span.brand-part1 {
@@ -11,7 +11,7 @@ header span.brand-part1 {
 }
 
 header span.brand-part2 {
-  color: #00eeee;
+  color: #1989ff;
 }
 
 @media (max-width: 768px) {
