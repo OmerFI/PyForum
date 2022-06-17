@@ -22,3 +22,9 @@
   font-size: 0.9rem;
   opacity: 50%;
 }
+
+@media (max-width: 768px) {
+  p.delete-comment-text {
+    display: none !important;
+  }
+}

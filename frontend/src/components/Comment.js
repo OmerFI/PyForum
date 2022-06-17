@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
 import DeleteCommentModal from "./modals/DeleteCommentModal";
 import "../css/Comment.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const Comment = ({ commentData }) => {
   let {
@@ -17,7 +19,6 @@ const Comment = ({ commentData }) => {
     postId,
     created_at: createdAt,
   } = commentData;
-  console.log(commentData);
   let [userData, setUserData] = useState(null);
   let { user } = useAuthContext();
 
@@ -83,7 +84,8 @@ const Comment = ({ commentData }) => {
               data-bs-toggle="modal"
               data-bs-target={"#deleteCommentModal-" + commentId}
             >
-              Yorumu Sil
+              <p className="d-inline me-2 delete-comment-text">Yorumu Sil</p>
+              <FontAwesomeIcon icon={faTrash} />
             </button>
             <DeleteCommentModal commentData={commentData} />
           </div>
