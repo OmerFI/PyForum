@@ -70,6 +70,7 @@ const PostDetails = () => {
                           replies: [],
                           categoryId,
                           postId,
+                          created_at: postDetails.created_at,
                         }}
                       />
                     )}
