@@ -6,6 +6,7 @@ import "../PostDetails.css";
 import Comment from "../components/Comment";
 import { useAuthContext } from "../context/AuthContext";
 import RefreshPage from "../utils/Page";
+import SkeletonComment from "../components/skeletons/SkeletonComment";
 
 const PostDetails = () => {
   let { categoryId, postId } = useParams();
@@ -82,6 +83,10 @@ const PostDetails = () => {
                       comment.postId = postId;
                       return <Comment key={comment.id} commentData={comment} />;
                     })}
+                  {!commentData &&
+                    [...Array(5)].map((_, index) => (
+                      <SkeletonComment key={index} />
+                    ))}
                 </div>
               </div>
             </div>
