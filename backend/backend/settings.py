@@ -15,10 +15,27 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 from django.core.management.utils import get_random_secret_key
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 BASE_DIR_FRONTEND = BASE_DIR.parent / "frontend"
+
+
+sentry_sdk.init(
+    dsn="https://d4580716d7ce449fb6169ca722a8c004@o1304995.ingest.sentry.io/6546064",
+    integrations=[
+        DjangoIntegration(),
+    ],
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    # We recommend adjusting this value in production.
+    traces_sample_rate=1.0,
+    # If you wish to associate users to errors (assuming you are using
+    # django.contrib.auth) you may enable sending PII data.
+    send_default_pii=True,
+)
 
 
 # Quick-start development settings - unsuitable for production
@@ -84,7 +101,7 @@ if DEBUG:
     )
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),  # 5 minutes
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=5) if DEBUG else timedelta(minutes=5),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=90),
     "ROTATE_REFRESH_TOKENS": True,
     "BLACKLIST_AFTER_ROTATION": True,
