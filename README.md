@@ -2,8 +2,8 @@
 
 PyForum is a full-stack web application made using **Django** on the backend and **React** on the frontend.
 
-![](images/index.png)
-![](images/detail.png)
+![](images/homepage.jpg)
+![](images/post-detail.jpg)
 
 ## Install
 
