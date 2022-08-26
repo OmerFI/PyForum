@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuthContext } from "../context/AuthContext";
 import useAxios from "../utils/useAxios";
-import Settings from "../Settings";
+import settings from "../Settings";
 
 const ProfileSettings = () => {
   let api = useAxios();
@@ -103,7 +103,7 @@ const ProfileSettings = () => {
 
         <form className="d-flex flex-column align-items-center justify-content-center mb-3">
           <img
-            src={userData ? Settings().BASE_URL + userData.image : null}
+            src={userData ? settings.BASE_URL + userData.image : null}
             alt=""
             className="rounded-circle mb-4"
             width={200}

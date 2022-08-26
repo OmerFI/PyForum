@@ -5,7 +5,7 @@ import RegisterModal from "./modals/RegisterModal";
 import RefreshPage from "../utils/Page";
 import { useState, useEffect } from "react";
 import useAxios from "../utils/useAxios";
-import Settings from "../Settings";
+import settings from "../Settings";
 
 const HeaderUserDetail = () => {
   const { logoutUser, user } = useAuthContext();
@@ -49,7 +49,7 @@ const HeaderUserDetail = () => {
           aria-expanded="false"
         >
           <img
-            src={userData ? Settings().BASE_URL + userData.image : ""}
+            src={userData ? settings.BASE_URL + userData.image : ""}
             width="32"
             height="32"
             className="rounded-circle"

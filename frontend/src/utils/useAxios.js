@@ -2,9 +2,9 @@ import jwt_decode from "jwt-decode";
 import axios from "axios";
 import dayjs from "dayjs";
 import { useAuthContext } from "../context/AuthContext";
-import Settings from "../Settings";
+import settings from "../Settings";
 
-const baseURL = Settings().BASE_URL;
+const baseURL = settings.BASE_URL;
 
 const useAxios = () => {
   let { authTokens, setUser, setAuthTokens } = useAuthContext();

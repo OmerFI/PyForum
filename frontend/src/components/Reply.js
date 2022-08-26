@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAnonimAxios } from "../utils/useAxios";
-import Settings from "../Settings";
+import settings from "../Settings";
 
 const Reply = ({ replyData }) => {
   let { author, content } = replyData;
@@ -26,7 +26,7 @@ const Reply = ({ replyData }) => {
       <a className="pr-3" href="#">
         <img
           className="rounded-circle"
-          src={userData && Settings().BASE_URL + userData.image}
+          src={userData && settings.BASE_URL + userData.image}
           style={{ width: "30px", height: "30px" }}
         />
       </a>

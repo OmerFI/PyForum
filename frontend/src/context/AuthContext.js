@@ -5,7 +5,7 @@ import axios from "axios";
 import getAuthTokens from "../utils/AuthTokens";
 import RefreshPage from "../utils/Page";
 import { useNavigate } from "react-router-dom";
-import Settings from "../Settings";
+import settings from "../Settings";
 
 export const AuthContext = React.createContext();
 
@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
 
   let loginUser = async (username, password) => {
     let response = await axios
-      .post(Settings().BASE_URL + "/api/token/", {
+      .post(settings.BASE_URL + "/api/token/", {
         username,
         password,
       })
@@ -52,7 +52,7 @@ export const AuthProvider = ({ children }) => {
 
   let registerUser = async (username, email, password) => {
     let response = await axios
-      .post(Settings().BASE_URL + "/api/users/register/", {
+      .post(settings.BASE_URL + "/api/users/register/", {
         username,
         email,
         password,

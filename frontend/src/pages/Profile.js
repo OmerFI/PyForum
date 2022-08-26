@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useAnonimAxios } from "../utils/useAxios";
 import { useState, useEffect } from "react";
-import Settings from "../Settings";
+import settings from "../Settings";
 import PostPreview from "../components/PostPreview";
 
 const Profile = () => {
@@ -34,7 +34,7 @@ const Profile = () => {
 
         <div className="d-flex flex-column align-items-center justify-content-center mb-3">
           <img
-            src={userData ? Settings().BASE_URL + userData.image : null}
+            src={userData ? settings.BASE_URL + userData.image : null}
             alt=""
             className="rounded-circle mb-4"
             width={200}

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAnonimAxios } from "../utils/useAxios";
 import Reply from "./Reply";
-import Settings from "../Settings";
+import settings from "../Settings";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
 import DeleteCommentModal from "./modals/DeleteCommentModal";
@@ -59,7 +59,7 @@ const Comment = ({ commentData }) => {
           <img
             className="mr-3 rounded-circle"
             alt=""
-            src={userData && Settings().BASE_URL + userData.image}
+            src={userData && settings.BASE_URL + userData.image}
             style={{ width: "60px", height: "60px" }}
           />
         </Link>
