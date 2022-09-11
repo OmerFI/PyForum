@@ -1,0 +1,7 @@
+django
+python-dotenv
+django-cors-headers
+djangorestframework
+djangorestframework-simplejwt
+django-resized
+pillow
