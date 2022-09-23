@@ -6,6 +6,10 @@
   padding-top: 10px;
 }
 
+#comment-content > p {
+  white-space: pre-wrap;
+}
+
 #comment-author-info {
   flex-grow: 1;
   padding-left: 16px;
