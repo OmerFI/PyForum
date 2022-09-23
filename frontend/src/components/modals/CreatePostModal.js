@@ -93,7 +93,7 @@ const CreatePostModal = () => {
                 maxLength={100}
                 minLength={10}
               />
-              <input
+              <textarea
                 type="text"
                 className="form-control bg-dark text-white mb-3 p-2"
                 id="content"
@@ -101,6 +101,7 @@ const CreatePostModal = () => {
                 required="required"
                 maxLength={500}
                 minLength={15}
+                style={{ height: "15rem" }}
               />
               <select
                 className="form-select bg-dark text-white mb-3 p-2"
