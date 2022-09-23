@@ -8,7 +8,7 @@ const CommentPreview = ({ commentData }) => {
           to={`/category/${commentData.owner_category}/${commentData.owner_post}/`}
           className="text-decoration-none text-white"
         >
-          <h6>{commentData.content}</h6>
+          <h6 className="white-space-pre-wrap">{commentData.content}</h6>
         </Link>
       </div>
 

@@ -92,7 +92,7 @@ const Comment = ({ commentData }) => {
         )}
       </div>
       <div className="media-body flex-grow-1" id="comment-content">
-        <p>{content}</p>
+        <p className="white-space-pre-wrap">{content}</p>
         <div className="replies small text-small">
           {replies.map((reply) => (
             <Reply replyData={reply} key={reply.id} />
