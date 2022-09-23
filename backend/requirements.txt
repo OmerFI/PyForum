@@ -16,7 +16,7 @@ django-cors-headers==3.13.0
     # via -r requirements.in
 django-resized==1.0.2
     # via -r requirements.in
-djangorestframework==3.13.1
+djangorestframework==3.14.0
     # via
     #   -r requirements.in
     #   djangorestframework-simplejwt
@@ -31,6 +31,4 @@ python-dotenv==0.21.0
 pytz==2022.2.1
     # via djangorestframework
 sqlparse==0.4.2
-    # via django
-tzdata==2022.2
     # via django
