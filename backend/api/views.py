@@ -194,9 +194,9 @@ class LatestCommentsView(ListAPIView):
         try:
             all_comments = Comment.objects.all()
             if len(all_comments) > self.COMMENT_COUNT:
-                comments = all_comments[: self.COMMENT_COUNT]
+                comments = all_comments[: len(all_comments) - self.COMMENT_COUNT - 1 : -1]
             else:
-                comments = all_comments
+                comments = all_comments[::-1]
         except Exception as e:
             raise Http404
         return comments
