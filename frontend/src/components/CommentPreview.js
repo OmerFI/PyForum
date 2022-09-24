@@ -12,7 +12,7 @@ const CommentPreview = ({ commentData }) => {
         </Link>
       </div>
 
-      <div className="comment-author">
+      <div className="comment-author align-self-center">
         <Link
           to={`/profile/${commentData.author}/`}
           className="text-decoration-none text-white"
