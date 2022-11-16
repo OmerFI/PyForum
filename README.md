@@ -39,7 +39,3 @@ Note: This site's language is `Turkish`
 - Every user has a profile and in the profile, there are posts which the user has posted.
 - Users can edit his profile image, firstname and surname.
 - In main page, there are categories and posts. Each category has maximum 5 posts in main page. If there are more than 5 posts, then a link to the category details page appears.
-
-## Live Demo
-
-https://pyforum.tech
